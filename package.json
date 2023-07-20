@@ -16,6 +16,7 @@
     "@mui/material": "^5.14.0",
     "firebase": "^10.0.0",
     "install": "^0.13.0",
+    "lightweight-charts": "^4.0.1",
     "material-ui": "^0.20.2",
     "npm": "^9.8.0",
     "react": "^18.2.0",

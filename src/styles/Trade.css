@@ -1,0 +1,53 @@
+.trademenu{
+    display:flex;
+    align-items:center; 
+    flex-direction:column; 
+    min-width: 100vh; 
+}
+
+.search{
+    display:flex;
+    flex-direction:row;
+    justify-content:center; 
+    margin: 20px; 
+    min-width: 100vh; 
+}
+
+.search-stock{
+    border: 1px solid black; 
+}
+
+.container{
+    display:flex; 
+    align-items: center; 
+    justify-content:center; 
+    min-width: 500px; 
+    min-height: 240px;
+    width: 100px; 
+    border: 2px solid grey; 
+}
+
+.trade{
+    display:flex; 
+    flex-direction:column; 
+}
+
+.trade-title{
+    margin: 30px 0 30px 0; 
+    border-bottom: 1px solid black; 
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+form div{
+    margin: 30px 0 30px 0; 
+}
+
+form > div{
+    margin: 0  0 30px 0 ;
+}
+
+form input{
+    border: 1px solid black; 
+}
+
