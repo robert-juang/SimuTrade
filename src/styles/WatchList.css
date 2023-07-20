@@ -1,0 +1,73 @@
+.watchlist {
+    max-width: 500px;
+    min-width: 200px;  
+    width: 100%;
+    border: 1px solid black; 
+    padding: 20px; 
+}
+
+.watchlist input{
+    border: 1px solid black; 
+}
+
+.watchlist > .trade-title{
+    margin: 0px 0px 30px 0;
+}
+
+.stock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.stock-name {
+    flex: 1;
+}
+
+.stock-price {
+    flex: 1;
+    text-align: right;
+}
+
+#mui-clear-icon{
+    cursor:pointer; 
+}
+
+.watchlist-input{
+    width:100%; 
+    display:flex; 
+    flex-direction:row; 
+    align-items:center; 
+    justify-content:center; 
+    margin:1em; 
+}
+
+.controller-buttons{
+    display:flex; 
+    flex-direction:row; 
+    align-items:center; 
+    min-width: 800px; 
+}
+
+.controller-buttons button{
+    color: white;
+}
+
+.controller-buttons button:nth-child(2){
+    background: green; 
+}
+
+.controller-buttons button:nth-child(4) {
+    background: orange;
+}
+
+.controller-buttons button:nth-child(6) {
+    background: blue;
+}
+
+.controller-buttons button:nth-child(8) {
+    background: red;
+}
