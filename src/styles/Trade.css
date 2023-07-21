@@ -23,7 +23,6 @@
     justify-content:center; 
     min-width: 500px; 
     min-height: 240px;
-    width: 100px; 
     border: 2px solid grey; 
     margin: 10px 10px 10px 60px;
 }
@@ -31,6 +30,7 @@
 .trade{
     display:flex; 
     flex-direction:column; 
+    margin: 30px;
 }
 
 .trade-title{
@@ -53,8 +53,10 @@ form input{
 }
 
 .search-main{
-    display:flex; 
-    flex-direction:column; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .nav__search{

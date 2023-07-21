@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import "../styles/Homepage.css"
 import PortfolioChart from "./PortfolioChart" 
 import WatchList from './WatchList';
@@ -18,6 +18,8 @@ function Homepage() {
 
   //keep this local for now
   const [timeframe, setTimeframe] = useState(""); 
+
+  const [Today, setToday] = useState(""); 
 
   const handleDateChange = (e) => {
     setStartDate(e.target.value);
@@ -68,6 +70,21 @@ function Homepage() {
     console.log(dateEnd); 
   }
 
+  useEffect(() =>{
+    const date = new Date();
+    const day = date.getDate();
+    let month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    //calculate correct month to string append
+    if (!(Math.floor(month / 10))){ 
+      month = "0" + month; 
+    }
+    // This arrangement can be altered based on how we want the date's format to appear.
+    const currentDate = `${year}-${month}-${day}`;
+    console.log(currentDate); // "17-6-2022"
+    setToday(currentDate)
+  }, [])
+
   return (
     <>
     <div className="home">
@@ -89,7 +106,7 @@ function Homepage() {
                 Start Date: <input
                   type="date"
                   min="1990-01-01"
-                  max="2023-01-01"
+                  max={Today}
                     value={startDate}
                   onChange={handleDateChange}
                 />
@@ -98,12 +115,20 @@ function Homepage() {
                 End Date: <input
                   type="date"
                   min="1990-01-01"
-                  max="2023-01-01"
+                  max={Today}
                     value={endDate}
                   onChange={handleDateEnd}
                 />
               </div>
-              <div>
+              <div className="realtime-checkbox">
+                <div className="help-outline">
+                  <p>
+                    The RealTime option will allow you to trade securities in real-time
+                    The layout will be different as you will not have the simulation controller available to you
+                    Only available during normal market hours from 9:30am to 4pm est 
+                    If you are trying to repeat today's trade after trading has ended, please set the startDate and the EndDate equal to each other
+                  </p>
+                </div>
                 Realtime-Trading: <input
                   type="checkbox" />
               </div>
@@ -114,6 +139,9 @@ function Homepage() {
                     value={portfolio}
                   onChange={handleStartAmount}
                 />
+              </div>
+              <div>
+                Additional settings:
               </div>
               <div>
                   TimeFrame: <select value={timeframe} onChange={handleTimeframe}>
@@ -128,9 +156,6 @@ function Homepage() {
                     <option value="1w">3m</option>
                     <option value="1yr">1yr</option>
                   </select>
-              </div>
-              <div>
-                Additional settings:
               </div>
               <button>Start Trading Simulator</button>
             </form>
