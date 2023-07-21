@@ -1,7 +1,7 @@
 .watchlist {
     max-width: 500px;
     min-width: 200px;  
-    width: 100%;
+    width: 25%;
     border: 1px solid black; 
     padding: 20px; 
 }

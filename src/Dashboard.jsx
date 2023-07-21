@@ -14,8 +14,21 @@ import Footer from "./Footer"
 export const simulationContext = React.createContext(false); //global simulation tracker
 
 function App() {
+  //did sim start 
   const [startSimulation, setStartSimulation] = useState(false); 
+  //current page 
   const [currentState, setCurrentState] = useState("home") 
+
+  //portfolio price 
+  const [portfolio, setPortfolio] = useState(100000); 
+
+  //start and end date
+  const [startDate, setStartDate] = useState(""); 
+  const [currentDate, setCurrentDate] = useState(""); 
+  const [endDate, setEndDate] = useState(""); 
+  const [isRealtime, setIsRealtime] = useState(""); 
+
+  //for logging error 
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useNavigate()
@@ -42,7 +55,7 @@ function App() {
     <>
       <Navigation setState={setCurrentState}/>
       <div className="content">
-        <simulationContext.Provider value={{ startSimulation, setStartSimulation }}>
+        <simulationContext.Provider value={{ startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, endDate, setEndDate, isRealtime, setIsRealtime }}>
           {currentState === "home" && <Homepage/> }
           {currentState === "news" && <News />}
           {currentState === "portfolio" && <Portfolio />}

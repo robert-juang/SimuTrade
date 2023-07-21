@@ -13,13 +13,17 @@ import stocks from "../assets/stocks.json";
 import { simulationContext } from "../Dashboard";
 
 function Trade() {
+    //keep track of simulation context
     const { startSimulation, setStartSimulation } = useContext(simulationContext);
 
+    //keep track if the stock has been searched 
     const [hasSearched, setHasSearched] = useState("");
     const [search, setSearch] = useState('');
 
+    //user action, buy amount, and price
     const [action, setAction] = useState("Buy"); //true means buy false means sell  
     const [amount, setAmount] = useState(""); 
+    const [stockPrice, setStockPrice] = useState(100); 
 
     //for search bar
     const OPTIONS_LIMIT = 10;
@@ -40,6 +44,7 @@ function Trade() {
 
     function handleSearch(){
         setHasSearched(true); 
+        setSearch(search) 
         // results.push({"name": "Google", "ticker": "$10"})
     }
 
@@ -52,7 +57,7 @@ function Trade() {
     }
 
     const searchStocks = async () => {
-        console.log(finnhub)
+        // console.log(finnhub)
         // TODO: Make a call to the backend here orelse it throws error 
         // const api_key = finnhub.ApiClient.instance.authentications['api_key'];
         // api_key.apiKey = import.meta.env.VITE_API_KEY_FINNHUB;

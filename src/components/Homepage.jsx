@@ -14,23 +14,21 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { simulationContext } from "../Dashboard";
 
 function Homepage() {
-  const {startSimulation, setStartSimulation} = useContext(simulationContext);
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
 
-  const [dateStart, setDateStart] = useState('');
-  const [dateEnd, setDateEnd] = useState('');
-  const [startAmount, setStartAmount] = useState("");
+  //keep this local for now
   const [timeframe, setTimeframe] = useState(""); 
 
   const handleDateChange = (e) => {
-    setDateStart(e.target.value);
+    setStartDate(e.target.value);
   };
 
   const handleDateEnd = (e) =>{
-    setDateEnd(e.target.value); 
+    setEndDate(e.target.value); 
   }
 
   const handleStartAmount = (e) => {
-    setStartAmount(e.target.value);
+    setPortfolio(e.target.value);
   }
 
   const handleTimeframe = (e) =>{
@@ -92,7 +90,7 @@ function Homepage() {
                   type="date"
                   min="1990-01-01"
                   max="2023-01-01"
-                  value={dateStart}
+                    value={startDate}
                   onChange={handleDateChange}
                 />
               </div>
@@ -101,7 +99,7 @@ function Homepage() {
                   type="date"
                   min="1990-01-01"
                   max="2023-01-01"
-                  value={dateEnd}
+                    value={endDate}
                   onChange={handleDateEnd}
                 />
               </div>
@@ -113,7 +111,7 @@ function Homepage() {
                 Start Balance: <input
                   type="number"
                   placeholder="Default: $100,000"
-                  value={startAmount}
+                    value={portfolio}
                   onChange={handleStartAmount}
                 />
               </div>

@@ -11,20 +11,39 @@ import {
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import "../styles/StockChart.css"
+import TSLA from "../assets/TSLA.json"
 
 function StockChart({stock}) {
 
   const [chart, setChart] = useState([]);
-  const {search} = stock; 
+  const [search, setSearch] = useState(stock); 
   const chartData = []
   const [note, setNote] = useState('');
   let dataMax = 0;
-
+// ${ import.meta.env.ALPHA_VANTAGE_API }
   const fetchChart = async () => {
-    await axios
-      .get(`https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${search}&apikey=${import.meta.env.ALPHA_VANTAGE_API}`)
-      .then(({ data }) => {
-        if (data["Monthly Time Series"]) {
+    console.log(search) 
+    // await axios
+    //   .get(`https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${search}&apikey=W3KQYEE0F4RZLOGP`)
+    //   .then(({ data }) => {
+    //     if (data["Monthly Time Series"]) {
+    //       for (const key in data["Monthly Time Series"]) {
+    //         const value = parseFloat(data["Monthly Time Series"][key]["4. close"]);
+    //         chartData.push({ "name": key, "value": value });
+    //         if (value > dataMax) {
+    //           dataMax = value;
+    //         }
+    //       }
+    //       setNote("");
+    //     }
+    //     else if (data.Note) {
+    //       setNote(data.Note)
+    //     }
+    //     setChart(chartData.reverse());
+    //   })
+    
+    const data = TSLA; 
+      if (data["Monthly Time Series"]) {
           for (const key in data["Monthly Time Series"]) {
             const value = parseFloat(data["Monthly Time Series"][key]["4. close"]);
             chartData.push({ "name": key, "value": value });
@@ -37,14 +56,12 @@ function StockChart({stock}) {
         else if (data.Note) {
           setNote(data.Note)
         }
-        console.log(chartData.reverse())
         setChart(chartData.reverse());
-      })
   };
 
   useEffect(() => {
     // This needs more testing 
-    // fetchChart();
+    fetchChart();
   }, [stock]);
 
   return (
