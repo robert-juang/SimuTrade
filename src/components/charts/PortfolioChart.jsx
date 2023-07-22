@@ -28,10 +28,10 @@ import {
 } from 'recharts';
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react'
-import "../styles/PortfolioChart.css"
-import TSLA from "../assets/TSLA.json"
+import "../../styles/PortfolioChart.css"
+import TSLA from "../../assets/TSLA.json"
 
-import { simulationContext } from "../Dashboard";
+import { simulationContext } from "../../Dashboard";
 
 function StockChart() {
     const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
@@ -42,25 +42,7 @@ function StockChart() {
     const [note, setNote] = useState('');
     let dataMax = 0;
     // ${ import.meta.env.ALPHA_VANTAGE_API }
-    const fetchChart = async () => {
-        // await axios
-        //   .get(`https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${search}&apikey=W3KQYEE0F4RZLOGP`)
-        //   .then(({ data }) => {
-        //     if (data["Monthly Time Series"]) {
-        //       for (const key in data["Monthly Time Series"]) {
-        //         const value = parseFloat(data["Monthly Time Series"][key]["4. close"]);
-        //         chartData.push({ "name": key, "value": value });
-        //         if (value > dataMax) {
-        //           dataMax = value;
-        //         }
-        //       }
-        //       setNote("");
-        //     }
-        //     else if (data.Note) {
-        //       setNote(data.Note)
-        //     }
-        //     setChart(chartData.reverse());
-        //   })
+    const fetchPortfolio = async () => {
         const data = TSLA;
         if (data["Monthly Time Series"]) {
             for (const key in data["Monthly Time Series"]) {
@@ -80,7 +62,8 @@ function StockChart() {
 
     useEffect(() => {
         // This needs more testing 
-        fetchChart();
+        fetchPortfolio();
+        // setChart(chartData.filter((entry) => (entry.name >= startDate)))
     }, [search]);
 
     return (

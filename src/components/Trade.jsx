@@ -1,7 +1,7 @@
 import React, {useState,useEffect,useContext} from 'react'
 import "../styles/Trade.css"
 import finnhub from 'https://cdn.skypack.dev/finnhub';
-import StockChart from "./StockChart"
+import StockChart from "./charts/StockChart"
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -14,7 +14,7 @@ import { simulationContext } from "../Dashboard";
 
 function Trade() {
     //keep track of simulation context
-    const { startSimulation, setStartSimulation } = useContext(simulationContext);
+    const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
 
     //keep track if the stock has been searched 
     const [hasSearched, setHasSearched] = useState("");
@@ -144,7 +144,7 @@ function Trade() {
                                 Buy Price: <input></input>
                             </div>
                             <div>
-                                Current Time: 
+                                Current Time: {currentDate}
                             </div>
                             <button>Review Order</button>
                         </form>

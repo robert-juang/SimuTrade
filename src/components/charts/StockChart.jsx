@@ -9,11 +9,15 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import axios from 'axios';
-import { useEffect, useState } from 'react'
-import "../styles/StockChart.css"
-import TSLA from "../assets/TSLA.json"
+import { useEffect, useState, useContext } from 'react'
+import "../../styles/StockChart.css"
+import TSLA from "../../assets/TSLA.json"
+
+import { simulationContext } from "../../Dashboard";
 
 function StockChart({stock}) {
+
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
 
   const [chart, setChart] = useState([]);
   const [search, setSearch] = useState(stock); 
@@ -43,6 +47,7 @@ function StockChart({stock}) {
     //   })
     
     const data = TSLA; 
+
       if (data["Monthly Time Series"]) {
           for (const key in data["Monthly Time Series"]) {
             const value = parseFloat(data["Monthly Time Series"][key]["4. close"]);
@@ -62,6 +67,7 @@ function StockChart({stock}) {
   useEffect(() => {
     // This needs more testing 
     fetchChart();
+    setChart(chartData.filter((entry) => (entry.name >= startDate)))
   }, [stock]);
 
   return (

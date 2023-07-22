@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import "../styles/Stats.css"
 
-function Dashboard() {
+import { simulationContext } from "../Dashboard";
+
+function Stats() {
+
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
+  
+  const [change, setChange] = useState("");
+    
   return (
     <div className="stats">
         <div className="stats-title">
@@ -9,17 +16,20 @@ function Dashboard() {
         </div>
         <div className="stats-content">
             <div>
-                Portfolio Value: $100,000
+                Portfolio Value: ${portfolio}
             </div>
             <div>
-                Gain/Loss: -100%
+                Gain/Loss: {change}%
             </div>
             <div>
-                Sim Time: 7/20/2023
+                Sim Range: {startDate} to {endDate}
+            </div>
+            <div>
+                Current Date: {currentDate}
             </div>
         </div>
     </div>
   )
 }
 
-export default Dashboard
+export default Stats

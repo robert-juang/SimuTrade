@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../styles/Profile.css"
 
 function Profile() {
+
+  const [username, setUsername] = useState()
+
   return (
       <div class="settings">
           <h3>Account Settings</h3>

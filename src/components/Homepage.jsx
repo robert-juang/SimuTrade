@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react'
 import "../styles/Homepage.css"
-import PortfolioChart from "./PortfolioChart" 
+import PortfolioChart from "./charts/PortfolioChart" 
 import WatchList from './WatchList';
-import Dashboard from './Stats'; 
-
+import Stats from './Stats'; 
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ReplayIcon from '@mui/icons-material/Replay';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import { simulationContext } from "../Dashboard";
 
@@ -17,9 +18,10 @@ function Homepage() {
   const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
 
   //keep this local for now
-  const [timeframe, setTimeframe] = useState(""); 
+  const [timeframe, setTimeframe] = useState("1d (default)"); 
 
   const [Today, setToday] = useState(""); 
+  const [showAdditionalSettings, setShowAdditionalSettings] = useState(false);
 
   const handleDateChange = (e) => {
     setStartDate(e.target.value);
@@ -35,6 +37,11 @@ function Homepage() {
 
   const handleTimeframe = (e) =>{
     setTimeframe(e.target.value);
+  };
+
+  const toggleAdditionalSettings = (e) => {
+    e.preventDefault(); 
+    setShowAdditionalSettings(prevState => !prevState);
   };
 
   //stop simulation
@@ -62,12 +69,14 @@ function Homepage() {
     if (!startSimulation){
       setStartSimulation(true); 
     }
-    if (startAmount === ""){
-      setStartAmount(100000);
+    
+    if (portfolio === ""){
+      setPortfolio(100000);
     }
-
-    console.log(dateStart);
-    console.log(dateEnd); 
+    setCurrentDate(startDate);
+    console.log(currentDate) 
+   
+    console.log(portfolio); 
   }
 
   useEffect(() =>{
@@ -81,7 +90,6 @@ function Homepage() {
     }
     // This arrangement can be altered based on how we want the date's format to appear.
     const currentDate = `${year}-${month}-${day}`;
-    console.log(currentDate); // "17-6-2022"
     setToday(currentDate)
   }, [])
 
@@ -105,18 +113,18 @@ function Homepage() {
               <div>
                 Start Date: <input
                   type="date"
+                  value={startDate}
                   min="1990-01-01"
                   max={Today}
-                    value={startDate}
                   onChange={handleDateChange}
                 />
               </div>
               <div>
                 End Date: <input
                   type="date"
+                  value={endDate}
                   min="1990-01-01"
                   max={Today}
-                    value={endDate}
                   onChange={handleDateEnd}
                 />
               </div>
@@ -136,27 +144,40 @@ function Homepage() {
                 Start Balance: <input
                   type="number"
                   placeholder="Default: $100,000"
-                    value={portfolio}
+                  value={portfolio}
                   onChange={handleStartAmount}
                 />
               </div>
-              <div>
+              <div className="additional-settings">
                 Additional settings:
-              </div>
-              <div>
-                  TimeFrame: <select value={timeframe} onChange={handleTimeframe}>
-                    <option value="1min">1 minute</option>
-                    <option value="5min">5 minutes</option>
-                    <option value="10min">10 minutes</option>
-                    <option value="30min">30 minutes</option>
-                    <option value="1hr">1 hour</option>
-                    <option value="1d">1d (default)</option>
-                    <option value="1w">1w</option>
-                    <option value="1w">1m</option>
-                    <option value="1w">3m</option>
-                    <option value="1yr">1yr</option>
-                  </select>
-              </div>
+                {!showAdditionalSettings ? 
+                    <ArrowDropDownIcon onClick={toggleAdditionalSettings} /> : <ArrowRightIcon onClick={toggleAdditionalSettings} />
+                }
+                </div>
+                    {showAdditionalSettings &&
+                      <>
+                        <div>
+                          TimeFrame: <select value={timeframe} onChange={handleTimeframe}>
+                            <option value="1min">1 minute</option>
+                            <option value="5min">5 minutes</option>
+                            <option value="10min">10 minutes</option>
+                            <option value="30min">30 minutes</option>
+                            <option value="1hr">1 hour</option>
+                            <option value="1d">1d (default)</option>
+                            <option value="1w">1w</option>
+                            <option value="1w">1m</option>
+                            <option value="1w">3m</option>
+                            <option value="1yr">1yr</option>
+                          </select>
+                        </div>
+                        <div className="realtime-checkbox">
+                          Enable Bid-Ask Spread: <input type="checkbox" />
+                        </div>
+                        <div className="realtime-checkbox">
+                          Enable Exotic Financial Derivatives (e.g. options, futures, swaps, etc): <input type="checkbox" />
+                        </div>
+                      </>
+                    }
               <button>Start Trading Simulator</button>
             </form>
           </div>
@@ -165,7 +186,7 @@ function Homepage() {
 
       {startSimulation && 
         <div className="homepage-portfolio">
-          <Dashboard /> 
+          <Stats /> 
           <div className="homepage-portfolio-main">
             <PortfolioChart />
             <WatchList />

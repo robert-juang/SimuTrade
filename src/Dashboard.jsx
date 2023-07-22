@@ -22,11 +22,14 @@ function App() {
   //portfolio price 
   const [portfolio, setPortfolio] = useState(100000); 
 
+  //current stocks in Portfolio, takes in stock object of the format: {ticker: AAPL, price: 120, dateBought: sdfas}
+  const [stocks, setStocks] = useState([]); 
+
   //start and end date
   const [startDate, setStartDate] = useState(""); 
   const [currentDate, setCurrentDate] = useState(""); 
   const [endDate, setEndDate] = useState(""); 
-  const [isRealtime, setIsRealtime] = useState(""); 
+  const [isRealtime, setIsRealtime] = useState(false); 
 
   //for logging error 
   const [error, setError] = useState("")
@@ -55,7 +58,12 @@ function App() {
     <>
       <Navigation setState={setCurrentState}/>
       <div className="content">
-        <simulationContext.Provider value={{ startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, endDate, setEndDate, isRealtime, setIsRealtime }}>
+        <simulationContext.Provider value={{ startSimulation, setStartSimulation, 
+                                            portfolio, setPortfolio, 
+                                            startDate, setStartDate, 
+                                            currentDate, setCurrentDate, 
+                                            endDate, setEndDate, 
+                                            isRealtime, setIsRealtime }}>
           {currentState === "home" && <Homepage/> }
           {currentState === "news" && <News />}
           {currentState === "portfolio" && <Portfolio />}
