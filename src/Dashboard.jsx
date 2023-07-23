@@ -28,9 +28,9 @@ function App() {
   const [stockList, setStockList] = useState(new StocksObject()); 
 
   //start and end date
-  const [startDate, setStartDate] = useState(""); 
-  const [currentDate, setCurrentDate] = useState(""); 
-  const [endDate, setEndDate] = useState(""); 
+  const [startDate, setStartDate] = useState("2022-01-01"); 
+  const [currentDate, setCurrentDate] = useState("2022-01-01"); 
+  const [endDate, setEndDate] = useState("2023-07-23"); 
   const [isRealtime, setIsRealtime] = useState(false); 
 
   //for logging error 

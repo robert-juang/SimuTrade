@@ -17,8 +17,11 @@ function Portfolio() {
                       <th>Symbol</th>
                       <th>Current Price</th>
                       <th>Purchase Price</th>
+                      <th>Total Cost</th>
+                      <th>Current Value</th>
                       <th>Quantity</th>
                       <th>Gain/Loss</th>
+                      <th>Gain/Loss %</th>
                       <th>Trade Action</th>
                   </tr>
               </thead>
@@ -28,8 +31,11 @@ function Portfolio() {
                       <td>{tradeObject.symbol}</td>
                       <td>{tradeObject.current_price}</td>
                       <td>{tradeObject.purchase_price}</td>
+                      <td>{tradeObject.totalCost}</td>
+                      <td>{tradeObject.findCurrentValue()}</td>
                       <td>{tradeObject.quantity}</td>
                       <td>{tradeObject.PnL}</td>
+                      <td>{tradeObject.findPnLPercent()}%</td>
                       <td>{tradeObject.trade_action}</td>
                   </tr>)
                  })}

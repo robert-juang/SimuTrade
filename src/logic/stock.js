@@ -1,3 +1,5 @@
+import { ProductionQuantityLimitsTwoTone } from "@mui/icons-material";
+
 class TradeObject {
     constructor(symbol, current_price, purchase_price, quantity, trade_action) {
         this.symbol = symbol;
@@ -6,6 +8,7 @@ class TradeObject {
         this.quantity = quantity;
         this.trade_action = trade_action;
         this.PnL = quantity * (current_price - purchase_price);
+        this.totalCost = purchase_price * quantity; 
     }
 
     // Getters and setters
@@ -28,7 +31,11 @@ class TradeObject {
     setPnL(pnl) { return this.PnL = pnl}
 
     findPnLPercent() {
-        return (this.purchase_price - this.current_price) / this.purchase_price;
+        return (((this.current_price - this.purchase_price) / this.purchase_price) * 100.0);
+    }
+
+    findCurrentValue(){
+        return this.quantity * this.current_price;
     }
 }
 

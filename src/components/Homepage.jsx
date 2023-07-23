@@ -154,9 +154,9 @@ function Homepage() {
     <div className="home">
       {!startSimulation && 
       <div className="homemenu">
-          <div className="trade">
-            <div className="trade-title">
-                Adjust your Trading Time <div className="help-outline">
+          <div className="trade-home">
+            <div className="trade-title-home">
+                Configure Settings <div className="help-outline">
                   <p>
                     This is a stock market trading game. You will be able to
                     trade any securitiy you want. The Trading Simulator allows you to trade
@@ -166,22 +166,14 @@ function Homepage() {
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
-              <div>
+              <div className="trade-start-date">
+                <span>Default Date: January 1st 2022</span>
                 Start Date: <input
                   type="date"
                   value={startDate}
                   min="1990-01-01"
                   max={Today}
                   onChange={handleDateChange}
-                />
-              </div>
-              <div>
-                End Date: <input
-                  type="date"
-                  value={endDate}
-                  min="1990-01-01"
-                  max={Today}
-                  onChange={handleDateEnd}
                 />
               </div>
               <div className="realtime-checkbox">
