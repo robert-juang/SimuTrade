@@ -11,10 +11,11 @@ import Paper from '@mui/material/Paper';
 import stocks from "../assets/stocks.json";
 
 import { simulationContext } from "../Dashboard";
+import { TradeObject, StocksObject } from "../logic/stock.js"
 
 function Trade() {
     //keep track of simulation context
-    const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
+    const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
 
     //keep track if the stock has been searched 
     const [hasSearched, setHasSearched] = useState("");
@@ -22,8 +23,9 @@ function Trade() {
 
     //user action, buy amount, and price
     const [action, setAction] = useState("Buy"); //true means buy false means sell  
-    const [amount, setAmount] = useState(""); 
+    const [amount, setAmount] = useState(0); 
     const [stockPrice, setStockPrice] = useState(100); 
+    const [submittedOrder, setSubmittedOrder] = useState(false); 
 
     //for search bar
     const OPTIONS_LIMIT = 10;
@@ -52,8 +54,34 @@ function Trade() {
         setAction(e.target.value);
     }
 
-    function handleSubmit(){
-        console.log("Submitted"); 
+    function handleAmount(e){
+        setAmount(e.target.value); 
+    }
+
+    function handleStockPrice(e){
+        setStockPrice(e.target.value); 
+    }
+
+    //handle the buy/sell order 
+
+    //   <th>Symbol</th>
+    //               <th>Current Price</th>
+    //               <th>Purchase Price</th>
+    //               <th>Quantity</th>
+    //               <th>Gain/Loss</th>
+    //               <th>Trade Action</th>
+
+    function handleSubmit(e){
+        e.preventDefault();
+        setSubmittedOrder(true); 
+
+        //TODO: fill in and update the currentStock Price 
+        const newObj = new TradeObject(search, 100, stockPrice, amount, action); 
+        
+        console.log(stockList)
+
+        stockList.addTrades(newObj); 
+        stockList.combine(); 
     }
 
     const searchStocks = async () => {
@@ -138,16 +166,22 @@ function Trade() {
                                 </select>
                             </div>
                             <div>
-                                Amount: <input type="number"></input>
+                                Current Price: Connect to API
                             </div>
                             <div>
-                                Buy Price: <input></input>
+                                Amount: <input type="number" value={amount} onChange={handleAmount}></input>
+                            </div>
+                            <div>
+                                Buy Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
                             </div>
                             <div>
                                 Current Time: {currentDate}
                             </div>
-                            <button>Review Order</button>
+                            <button>Submit Order</button>
                         </form>
+                        {submittedOrder && 
+                            <div>Trade Placed!</div>
+                        }
                     </div>
                 </div>
             </div>

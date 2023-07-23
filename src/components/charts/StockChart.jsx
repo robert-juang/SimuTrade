@@ -17,7 +17,7 @@ import { simulationContext } from "../../Dashboard";
 
 function StockChart({stock}) {
 
-  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
 
   const [chart, setChart] = useState([]);
   const [search, setSearch] = useState(stock); 
@@ -60,15 +60,14 @@ function StockChart({stock}) {
         }
         else if (data.Note) {
           setNote(data.Note)
-        }
-        setChart(chartData.reverse());
+      }
+      setChart(chartData.reverse());
+      setChart(chartData.filter((entry) => (entry.name >= startDate) && (entry.name <= endDate))); 
   };
 
   useEffect(() => {
-    // This needs more testing 
     fetchChart();
-    setChart(chartData.filter((entry) => (entry.name >= startDate)))
-  }, [stock]);
+  }, []);
 
   return (
     <div className="chart">

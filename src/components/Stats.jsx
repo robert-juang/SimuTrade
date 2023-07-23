@@ -5,9 +5,9 @@ import { simulationContext } from "../Dashboard";
 
 function Stats() {
 
-  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
   
-  const [change, setChange] = useState("");
+  const [change, setChange] = useState(0.00);
     
   return (
     <div className="stats">

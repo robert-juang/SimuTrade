@@ -34,10 +34,9 @@ import TSLA from "../../assets/TSLA.json"
 import { simulationContext } from "../../Dashboard";
 
 function StockChart() {
-    const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
+    const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
 
     const [chart, setChart] = useState([]);
-    const [search, setSearch] = useState("TSLA");
     const chartData = []
     const [note, setNote] = useState('');
     let dataMax = 0;
@@ -64,7 +63,7 @@ function StockChart() {
         // This needs more testing 
         fetchPortfolio();
         // setChart(chartData.filter((entry) => (entry.name >= startDate)))
-    }, [search]);
+    }, []);
 
     return (
         <div className="chart">

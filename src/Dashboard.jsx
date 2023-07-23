@@ -11,6 +11,8 @@ import Profile from "./components/Profile"
 import Trade from "./components/Trade" 
 import Footer from "./Footer"
 
+import {TradeObject, StocksObject} from "./logic/stock.js"
+
 export const simulationContext = React.createContext(false); //global simulation tracker
 
 function App() {
@@ -23,7 +25,7 @@ function App() {
   const [portfolio, setPortfolio] = useState(100000); 
 
   //current stocks in Portfolio, takes in stock object of the format: {ticker: AAPL, price: 120, dateBought: sdfas}
-  const [stocks, setStocks] = useState([]); 
+  const [stockList, setStockList] = useState(new StocksObject()); 
 
   //start and end date
   const [startDate, setStartDate] = useState(""); 
@@ -63,7 +65,8 @@ function App() {
                                             startDate, setStartDate, 
                                             currentDate, setCurrentDate, 
                                             endDate, setEndDate, 
-                                            isRealtime, setIsRealtime }}>
+                                            isRealtime, setIsRealtime,
+                                            stockList, setStockList }}>
           {currentState === "home" && <Homepage/> }
           {currentState === "news" && <News />}
           {currentState === "portfolio" && <Portfolio />}

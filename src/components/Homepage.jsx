@@ -11,15 +11,16 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import FastForwardIcon from '@mui/icons-material/FastForward';
+import FastRewindIcon from '@mui/icons-material/FastRewind';
 
 import { simulationContext } from "../Dashboard";
 
 function Homepage() {
-  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime } = useContext(simulationContext);
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
 
   //keep this local for now
   const [timeframe, setTimeframe] = useState("1d (default)"); 
-
   const [Today, setToday] = useState(""); 
   const [showAdditionalSettings, setShowAdditionalSettings] = useState(false);
 
@@ -56,14 +57,72 @@ function Homepage() {
     console.log("saved") 
   }
 
-  function forwardSim() {
-    console.log("forward")
+  //logic for simulation 
+  function forwardSimDay() {
+    function incrementDate(dateString) {
+      // Parse the date string into a date object
+      const date = new Date(dateString);
+
+      // Increment the date by one day
+      date.setDate(date.getDate() + 1);
+
+      // Concatenate the components into a yyyy-mm-dd string
+      return date.toISOString().split('T')[0];
+    }
+    setCurrentDate(incrementDate(currentDate))
+    console.log(currentDate) 
   }
 
-  function backwardSim() {
-    console.log("backward")
+  function backwardSimDay() {
+    function decrementDate(dateString) {
+      // Parse the date string into a date object
+      var date = new Date(dateString);
+
+      // Decrement the date by one day
+      date.setDate(date.getDate() - 1);
+
+      // Concatenate the components into a yyyy-mm-dd string
+      return date.toISOString().split('T')[0];
+    }
+    setCurrentDate(decrementDate(currentDate)) 
+    console.log(currentDate)
   }
 
+  function forwardSimMonth() {
+    function incrementMonth(dateString) {
+      // Parse the date string into a date object
+      const date = new Date(dateString);
+
+      // Increment the month by one
+      date.setMonth(date.getMonth() + 1);
+
+      // Concatenate the components into a yyyy-mm-dd string
+      return date.toISOString().split('T')[0];
+    }
+    setCurrentDate(incrementMonth(currentDate))
+    console.log(currentDate)
+  }
+
+  function backwardSimMonth() {
+    function decrementMonth(dateString) {
+      // Parse the date string into a date object
+      var date = new Date(dateString);
+
+      // Decrement the month by one
+      date.setMonth(date.getMonth() - 1);
+
+      // Concatenate the components into a yyyy-mm-dd string
+      return date.toISOString().split('T')[0];
+    }
+    setCurrentDate(decrementMonth(currentDate))
+    console.log(currentDate)
+  }
+
+  function resetSimDay(){
+    setCurrentDate(startDate)
+  }
+  
+  //submit form
   function handleSubmit(e){
     e.preventDefault(); 
     if (!startSimulation){
@@ -74,9 +133,6 @@ function Homepage() {
       setPortfolio(100000);
     }
     setCurrentDate(startDate);
-    console.log(currentDate) 
-   
-    console.log(portfolio); 
   }
 
   useEffect(() =>{
@@ -129,14 +185,14 @@ function Homepage() {
                 />
               </div>
               <div className="realtime-checkbox">
-                <div className="help-outline">
+                {/* <div className="help-outline">
                   <p>
                     The RealTime option will allow you to trade securities in real-time
                     The layout will be different as you will not have the simulation controller available to you
                     Only available during normal market hours from 9:30am to 4pm est 
                     If you are trying to repeat today's trade after trading has ended, please set the startDate and the EndDate equal to each other
                   </p>
-                </div>
+                </div> */}
                 Realtime-Trading: <input
                   type="checkbox" />
               </div>
@@ -192,9 +248,11 @@ function Homepage() {
             <WatchList />
           </div>
           <div className="controller-buttons">
-            Simulation Controller:
-            <PlayArrowIcon/><button onClick={forwardSim}>Forward Day</button>
-            <ReplayIcon /><button onClick={backwardSim}>Backward</button>
+            <PlayArrowIcon/><button onClick={forwardSimDay}>Forward Day</button>
+            <FastForwardIcon /><button onClick={forwardSimMonth}>Forward Month</button>
+            <ReplayIcon /><button onClick={backwardSimDay}>Backward</button>
+            <FastRewindIcon /><button onClick={backwardSimMonth}>Backward Month</button>
+            <ReplayIcon /><button onClick={resetSimDay}>Reset</button>
             <SaveAltIcon /><button onClick={saveSim}>Save Simulation</button>
             <CancelIcon /><button onClick={stopSim}>Stop Simulation</button>
           </div>
