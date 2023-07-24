@@ -22,7 +22,7 @@ function Stats() {
                 Gain/Loss: {change}%
             </div>
             <div>
-                Sim Range: {startDate} to {endDate}
+                Start Date: {startDate}
             </div>
             <div>
                 Current Date: {currentDate}

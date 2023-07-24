@@ -12,4 +12,10 @@
   --font-title: "Lucida Console","Courier New",monospace;
   --font-title-description: 'Open Sans', sans-serif;
   --font-login: 'Lato', sans-serif;
+
+  background-color: #242424;
+  --nav-bar-color:black; 
+  --main-background-color:#242424;
+  --main-background-hover-color: rgb(142 142 154 / 50%);
+  --footer-color: black; 
 }

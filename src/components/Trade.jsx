@@ -62,15 +62,6 @@ function Trade() {
         setStockPrice(e.target.value); 
     }
 
-    //handle the buy/sell order 
-
-    //   <th>Symbol</th>
-    //               <th>Current Price</th>
-    //               <th>Purchase Price</th>
-    //               <th>Quantity</th>
-    //               <th>Gain/Loss</th>
-    //               <th>Trade Action</th>
-
     function handleSubmit(e){
         e.preventDefault();
         setSubmittedOrder(true); 
@@ -169,10 +160,10 @@ function Trade() {
                                 Current Price: Connect to API
                             </div>
                             <div>
-                                Amount: <input type="number" value={amount} onChange={handleAmount}></input>
+                                Shares: <input type="number" value={amount} onChange={handleAmount}></input>
                             </div>
                             <div>
-                                Buy Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
+                                {action} Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
                             </div>
                             <div>
                                 Current Time: {currentDate}

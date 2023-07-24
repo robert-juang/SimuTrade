@@ -13,6 +13,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import FastForwardIcon from '@mui/icons-material/FastForward';
 import FastRewindIcon from '@mui/icons-material/FastRewind';
+import ReplyIcon from '@mui/icons-material/Reply';
+import RedoIcon from '@mui/icons-material/Redo';
 
 import { simulationContext } from "../Dashboard";
 
@@ -204,20 +206,6 @@ function Homepage() {
                 </div>
                     {showAdditionalSettings &&
                       <>
-                        <div>
-                          TimeFrame: <select value={timeframe} onChange={handleTimeframe}>
-                            <option value="1min">1 minute</option>
-                            <option value="5min">5 minutes</option>
-                            <option value="10min">10 minutes</option>
-                            <option value="30min">30 minutes</option>
-                            <option value="1hr">1 hour</option>
-                            <option value="1d">1d (default)</option>
-                            <option value="1w">1w</option>
-                            <option value="1w">1m</option>
-                            <option value="1w">3m</option>
-                            <option value="1yr">1yr</option>
-                          </select>
-                        </div>
                         <div className="realtime-checkbox">
                           Enable Bid-Ask Spread: <input type="checkbox" />
                         </div>
@@ -237,13 +225,13 @@ function Homepage() {
           <Stats /> 
           <div className="homepage-portfolio-main">
             <PortfolioChart />
-            <WatchList />
+            {/* <WatchList /> */}
           </div>
           <div className="controller-buttons">
-            <PlayArrowIcon/><button onClick={forwardSimDay}>Forward Day</button>
-            <FastForwardIcon /><button onClick={forwardSimMonth}>Forward Month</button>
-            <ReplayIcon /><button onClick={backwardSimDay}>Backward</button>
-            <FastRewindIcon /><button onClick={backwardSimMonth}>Backward Month</button>
+            <PlayArrowIcon/><button onClick={forwardSimDay}>+1 Day</button>
+            <FastForwardIcon /><button onClick={forwardSimMonth}>+1 Month</button>
+            <ReplyIcon /><button onClick={backwardSimDay}>-1 day</button>
+            <FastRewindIcon /><button onClick={backwardSimMonth}>-1 Month</button>
             <ReplayIcon /><button onClick={resetSimDay}>Reset</button>
             <SaveAltIcon /><button onClick={saveSim}>Save Simulation</button>
             <CancelIcon /><button onClick={stopSim}>Stop Simulation</button>
