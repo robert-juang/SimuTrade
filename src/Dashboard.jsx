@@ -11,7 +11,7 @@ import Profile from "./components/Profile"
 import Trade from "./components/Trade" 
 import Footer from "./Footer"
 
-import {TradeObject, StocksObject} from "./logic/stock.js"
+import {TradeObject, StocksObject} from "./logic/stock.ts"
 
 export const simulationContext = React.createContext(false); //global simulation tracker
 

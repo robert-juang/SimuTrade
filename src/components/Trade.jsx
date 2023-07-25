@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import stocks from "../assets/stocks.json";
 
 import { simulationContext } from "../Dashboard";
-import { TradeObject, StocksObject } from "../logic/stock.js"
+import { TradeObject, StocksObject } from "../logic/stock.ts"
 
 function Trade() {
     //keep track of simulation context
