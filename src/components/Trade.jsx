@@ -46,7 +46,6 @@ function Trade() {
 
     function handleSearch(){
         setHasSearched(true); 
-        setSearch(search) 
         // results.push({"name": "Google", "ticker": "$10"})
     }
 
@@ -89,7 +88,8 @@ function Trade() {
 
     useEffect(() => {
         searchStocks();
-    }, [search]);
+        console.log("serached")
+    }, []);
 
     return (
         <div>
@@ -143,7 +143,7 @@ function Trade() {
             
             {hasSearched && 
             <div className="search-main">
-                <StockChart stock={search}/>
+                <StockChart stock={search} setStock={setSearch}/>
                 <div className="container">
                     <div className="trade">
                         <div className="trade-title">

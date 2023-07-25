@@ -5,6 +5,7 @@
     border: 2px solid black; 
     min-width: 100px; 
     width: 300px; 
+    color: white; 
 }
 
 .stats-content{

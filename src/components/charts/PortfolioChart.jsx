@@ -63,6 +63,7 @@ function StockChart() {
         // This needs more testing 
         fetchPortfolio();
         // setChart(chartData.filter((entry) => (entry.name >= startDate)))
+        console.log(chart) 
     }, []);
 
     return (
@@ -80,7 +81,7 @@ function StockChart() {
                         bottom: 0,
                     }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid strokeDasharray="6 6" />
                     <XAxis dataKey="name" />
                     <YAxis dataKey="value" type="number" domain={[0, "dataMax"]} />
                     <Tooltip />

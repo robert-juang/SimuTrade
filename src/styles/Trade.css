@@ -11,6 +11,8 @@
     justify-content:center; 
     margin: 20px; 
     min-width: 100vh; 
+    background-color: var(--main-background-hover-color);
+    border-radius: 2%;
 }
 
 .search-stock{
@@ -25,6 +27,7 @@
     min-height: 240px;
     border: 2px solid grey; 
     margin: 10px 10px 10px 60px;
+    color: white; 
 }
 
 .trade{

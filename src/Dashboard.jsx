@@ -38,10 +38,6 @@ function App() {
   const { currentUser, logout } = useAuth()
   const history = useNavigate()
 
-  useEffect(() => {
-    console.log(currentState); 
-  }, [])
-
   async function handleLogout() {
     setError("")
     try {

@@ -15,18 +15,17 @@ import TSLA from "../../assets/TSLA.json"
 
 import { simulationContext } from "../../Dashboard";
 
-function StockChart({stock}) {
+function StockChart({stock, setStock}) {
 
   const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
 
   const [chart, setChart] = useState([]);
-  const [search, setSearch] = useState(stock); 
   const chartData = []
   const [note, setNote] = useState('');
   let dataMax = 0;
 // ${ import.meta.env.ALPHA_VANTAGE_API }
   const fetchChart = async () => {
-    console.log(search) 
+
     // await axios
     //   .get(`https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${search}&apikey=W3KQYEE0F4RZLOGP`)
     //   .then(({ data }) => {
@@ -61,13 +60,17 @@ function StockChart({stock}) {
         else if (data.Note) {
           setNote(data.Note)
       }
-      setChart(chartData.reverse());
-      setChart(chartData.filter((entry) => (entry.name >= startDate) && (entry.name <= endDate))); 
+      let filteredData = chartData.filter((entry) => (entry.name >= startDate && entry.name <= currentDate));
+      // You can reverse the data here, if needed
+      filteredData = filteredData.reverse();
+
+      setChart(filteredData);
   };
 
   useEffect(() => {
+    console.log("run")
     fetchChart();
-  }, []);
+  }, [stock]);
 
   return (
     <div className="chart">
