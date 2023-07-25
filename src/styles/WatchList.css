@@ -56,18 +56,20 @@
     color: white;
 }
 
-.controller-buttons button:nth-child(2){
+.controller-buttons button:nth-child(4n+2){
+    margin-right:10px; 
     background: green; 
 }
 
-.controller-buttons button:nth-child(4) {
-    background: orange;
+.controller-buttons button:nth-child(4n-4) {
+    margin-right: 10px;
+    background: red;
 }
 
-.controller-buttons button:nth-child(6) {
+/* .controller-buttons button:nth-child(6) {
     background: blue;
 }
 
 .controller-buttons button:nth-child(8) {
     background: red;
-}
+} */

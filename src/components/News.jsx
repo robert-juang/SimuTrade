@@ -15,6 +15,7 @@ const News = () => {
 
     return (
         <>  
+        <div className="news-overall">
             <h2 className="news-stories">Top Stories:</h2> 
             <div className="news-container-primary">
                 <div key={0} className="news-block-primary">
@@ -38,6 +39,7 @@ const News = () => {
                     </div>
                 ))}
             </div>
+        </div>
         </>
     );
 };

@@ -71,7 +71,9 @@ function Homepage() {
       // Concatenate the components into a yyyy-mm-dd string
       return date.toISOString().split('T')[0];
     }
-    setCurrentDate(incrementDate(currentDate))
+    if (incrementDate(currentDate) <= Today){
+      setCurrentDate(incrementDate(currentDate))
+    }
     console.log(currentDate) 
   }
 
@@ -101,7 +103,9 @@ function Homepage() {
       // Concatenate the components into a yyyy-mm-dd string
       return date.toISOString().split('T')[0];
     }
-    setCurrentDate(incrementMonth(currentDate))
+    if (incrementMonth(currentDate) <= Today) {
+      setCurrentDate(incrementMonth(currentDate))
+    }
     console.log(currentDate)
   }
 
@@ -169,7 +173,6 @@ function Homepage() {
             </div>
             <form onSubmit={handleSubmit}>
               <div className="trade-start-date">
-                <span>Default Date: January 1st 2022</span>
                 Start Date: <input
                   type="date"
                   value={startDate}

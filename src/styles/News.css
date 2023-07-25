@@ -1,3 +1,10 @@
+.news-overall{
+    color: white;
+    max-width: 1750px;
+    min-width: 1750px;
+    margin: auto;
+}
+
 .news-stories {
     text-align:center; 
 }
@@ -6,7 +13,7 @@
     display:flex; 
     justify-content: center;
     margin: 10px;
-    min-width: 300px;
+    min-width: 100vh;
 }
 
 .news-block-primary {
@@ -38,7 +45,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content:center; 
-    margin: 10px;
     min-width: 100vh;
 }
 

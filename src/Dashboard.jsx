@@ -80,7 +80,7 @@ function App() {
           {currentState === "trade" && <Trade />}
         </simulationContext.Provider>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   )
 }
