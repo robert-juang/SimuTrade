@@ -1,4 +1,4 @@
-import React, {useState,useEffect,useContext} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import "../styles/Trade.css"
 import finnhub from 'https://cdn.skypack.dev/finnhub';
 import StockChart from "./charts/StockChart"
@@ -9,9 +9,15 @@ import { createFilterOptions } from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import stocks from "../assets/stocks.json";
+import Select from 'react-select'
 
 import { simulationContext } from "../Dashboard";
 import { TradeObject, StocksObject } from "../logic/stock.ts"
+
+const options = [
+    { value: true, label: 'Buy' },
+    { value: false, label: 'Sell' },
+]
 
 function Trade() {
     //keep track of simulation context
@@ -22,10 +28,10 @@ function Trade() {
     const [search, setSearch] = useState('');
 
     //user action, buy amount, and price
-    const [action, setAction] = useState("Buy"); //true means buy false means sell  
-    const [amount, setAmount] = useState(0); 
-    const [stockPrice, setStockPrice] = useState(100); 
-    const [submittedOrder, setSubmittedOrder] = useState(false); 
+    const [action, setAction] = useState(true); //true means buy false means sell  
+    const [amount, setAmount] = useState(0);
+    const [stockPrice, setStockPrice] = useState(100);
+    const [submittedOrder, setSubmittedOrder] = useState(false);
 
     //for search bar
     const OPTIONS_LIMIT = 10;
@@ -41,37 +47,38 @@ function Trade() {
     };
 
     const handleInputChange = (e) => {
-        setSearch(e.target.value); 
+        setSearch(e.target.value);
     }
 
-    function handleSearch(){
-        setHasSearched(true); 
+    function handleSearch() {
+        setHasSearched(true);
         // results.push({"name": "Google", "ticker": "$10"})
     }
 
     function handleAction(e) {
-        setAction(e.target.value);
+        console.log(e)
+        setAction(e.value);
     }
 
-    function handleAmount(e){
-        setAmount(e.target.value); 
+    function handleAmount(e) {
+        setAmount(e.target.value);
     }
 
-    function handleStockPrice(e){
-        setStockPrice(e.target.value); 
+    function handleStockPrice(e) {
+        setStockPrice(e.target.value);
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
-        setSubmittedOrder(true); 
+        setSubmittedOrder(true);
 
         //TODO: fill in and update the currentStock Price 
-        const newObj = new TradeObject(search, 100, stockPrice, amount, action); 
-        
+        const newObj = new TradeObject(search, 100, stockPrice, amount, action);
+
         console.log(stockList)
 
-        stockList.addTrades(newObj); 
-        stockList.combine(); 
+        stockList.addTrades(newObj);
+        stockList.combine();
     }
 
     const searchStocks = async () => {
@@ -93,10 +100,10 @@ function Trade() {
 
     return (
         <div>
-        {startSimulation ?
-        <div className="trademenu">
-            <div className="search">
-                {/* <input type="text" className="search-stock" name="search" value={search} placeholder="Enter a stock name" onChange={handleInputChange}/>  */}
+            {startSimulation ?
+                <div className="trademenu">
+                    <div className="search">
+                        {/* <input type="text" className="search-stock" name="search" value={search} placeholder="Enter a stock name" onChange={handleInputChange}/>  */}
                         <Autocomplete
                             className="nav__search"
                             PaperComponent={({ children }) => (
@@ -138,47 +145,60 @@ function Trade() {
                             />}
                         >
                         </Autocomplete>
-                <button onClick={handleSearch}>Submit</button>
-            </div>
-            
-            {hasSearched && 
-            <div className="search-main">
-                <StockChart stock={search} setStock={setSearch}/>
-                <div className="container">
-                    <div className="trade">
-                        <div className="trade-title">
-                            {action} {search}
-                        </div>
-                        <form onSubmit={handleSubmit}>
-                            <div>
-                                Buy/Sell: <select value={action} onChange={handleAction}>
+                        <button onClick={handleSearch}>Submit</button>
+                    </div>
+
+                    {hasSearched &&
+                        <div className="search-main">
+                            <StockChart stock={search} setStock={setSearch} />
+                            <div className="container">
+                                <div className="trade">
+                                    <div className="trade-title">
+                                        {action ? "Buy" : "Sell"} {search}
+                                    </div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="buy-sell">
+                                            {/* Buy/Sell: <select value={action} onChange={handleAction}>
                                     <option value={"Buy"}>buy</option>
                                     <option value={"Sell"}>sell</option>
-                                </select>
+                                </select> */}
+                                            Buy/Sell: <Select
+                                                defaultValue={action}
+                                                onChange={handleAction}
+                                                options={options}
+                                                theme={(theme) => ({
+                                                    ...theme,
+                                                    borderRadius: 10,
+                                                    colors: {
+                                                        ...theme.colors,
+                                                        primary25: 'grey',
+                                                        primary: 'black',
+                                                    },
+                                                })} />
+                                        </div>
+                                        <div>
+                                            Current Price: Connect to API
+                                        </div>
+                                        <div>
+                                            Shares: <input type="number" value={amount} onChange={handleAmount}></input>
+                                        </div>
+                                        <div>
+                                            {action ? "Buy" : "Sell"} Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
+                                        </div>
+                                        <div>
+                                            Current Time: {currentDate}
+                                        </div>
+                                        <button>Submit Order</button>
+                                    </form>
+                                    {submittedOrder &&
+                                        <div>Trade Placed!</div>
+                                    }
+                                </div>
                             </div>
-                            <div>
-                                Current Price: Connect to API
-                            </div>
-                            <div>
-                                Shares: <input type="number" value={amount} onChange={handleAmount}></input>
-                            </div>
-                            <div>
-                                {action} Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
-                            </div>
-                            <div>
-                                Current Time: {currentDate}
-                            </div>
-                            <button>Submit Order</button>
-                        </form>
-                        {submittedOrder && 
-                            <div>Trade Placed!</div>
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
-            </div>
-            }
-        </div>
-        : <div>Simulation Not Started</div>}
+                : <div>Simulation Not Started</div>}
         </div>
     )
 }

@@ -1,68 +1,72 @@
-.trademenu{
-    display:flex;
+.trademenu {
+    display: flex;
     align-items: stretch;
-    flex-direction:column; 
-    min-width: 100vh; 
+    flex-direction: column;
+    min-width: 100vh;
 }
 
-.search{
-    display:flex;
-    flex-direction:row;
-    justify-content:center; 
-    margin: 20px; 
-    min-width: 100vh; 
+.search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+    min-width: 100vh;
     background-color: var(--main-background-hover-color);
     border-radius: 2%;
 }
 
-.search-stock{
-    border: 1px solid black; 
+.search-stock {
+    border: 1px solid black;
 }
 
-.container{
-    display:flex; 
-    align-items: center; 
-    justify-content:center; 
-    min-width: 500px; 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 500px;
     min-height: 240px;
-    border: 2px solid grey; 
+    border: 2px solid grey;
     margin: 10px 10px 10px 60px;
-    color: white; 
+    color: white;
 }
 
-.trade{
-    display:flex; 
-    flex-direction:column; 
+.trade {
+    display: flex;
+    flex-direction: column;
     margin: 30px;
 }
 
-.trade-title{
-    margin: 30px 0 30px 0; 
-    border-bottom: 1px solid black; 
+.trade-title {
+    margin: 30px 0 30px 0;
+    border-bottom: 1px solid black;
     font-weight: bolder;
     font-size: xx-large;
 }
 
-form div{
-    margin: 30px 0 30px 0; 
+
+form input {
+    border: 1px solid black;
 }
 
-form > div{
-    margin: 0  0 30px 0 ;
-}
-
-form input{
-    border: 1px solid black; 
-}
-
-.search-main{
+.search-main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
 }
 
-.nav__search{
-    width: 100%; 
-    min-width: 50vh; 
+.nav__search {
+    width: 100%;
+    min-width: 50vh;
+}
+
+.buy-sell {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.css-b62m3t-container {
+    margin: 20px;
+    color: black;
 }
