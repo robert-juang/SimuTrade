@@ -51,6 +51,7 @@
     align-items:center; 
     min-width: 800px; 
     color: white; 
+    margin: 20px; 
 }
 
 .controller-buttons button{

@@ -33,7 +33,7 @@ function Portfolio() {
                       <td>{tradeObject.purchase_price}</td>
                       <td>{tradeObject.totalCost}</td>
                       <td>{tradeObject.findCurrentValue()}</td>
-                      <td>{tradeObject.quantity}</td>
+                      <td>{tradeObject.trade_action==="Buy" ? tradeObject.quantity : -1*tradeObject.quantity}</td>
                       <td>{tradeObject.PnL}</td>
                       <td>{tradeObject.findPnLPercent()}%</td>
                       <td>{tradeObject.trade_action}</td>

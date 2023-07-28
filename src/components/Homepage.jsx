@@ -17,6 +17,8 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import RedoIcon from '@mui/icons-material/Redo';
 
 import { simulationContext } from "../Dashboard";
+import { TradeObject, StocksObject } from "../logic/stock.ts"
+
 
 function Homepage() {
   const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
@@ -52,6 +54,7 @@ function Homepage() {
     if (startSimulation){
       setStartSimulation(false); 
     }
+    setStockList(new StocksObject());
   }
 
   //save simulation
@@ -88,8 +91,10 @@ function Homepage() {
       // Concatenate the components into a yyyy-mm-dd string
       return date.toISOString().split('T')[0];
     }
-    setCurrentDate(decrementDate(currentDate)) 
-    console.log(currentDate)
+    if (decrementDate(currentDate) >= startDate) {
+      setCurrentDate(decrementDate(currentDate))
+    }
+    console.log(currentDate) 
   }
 
   function forwardSimMonth() {
@@ -120,7 +125,9 @@ function Homepage() {
       // Concatenate the components into a yyyy-mm-dd string
       return date.toISOString().split('T')[0];
     }
-    setCurrentDate(decrementMonth(currentDate))
+    if (decrementMonth(currentDate) >= startDate) {
+      setCurrentDate(decrementMonth(currentDate))
+    }
     console.log(currentDate)
   }
 

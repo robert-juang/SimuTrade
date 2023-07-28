@@ -73,12 +73,21 @@ function Trade() {
         setSubmittedOrder(true);
 
         //TODO: fill in and update the currentStock Price 
-        const newObj = new TradeObject(search, 100, stockPrice, amount, action);
+        const newObj = new TradeObject(search, 100, stockPrice, amount, action ? "Buy" : "Sell");
 
-        console.log(stockList)
-
+        //adjust portfolio 
+        console.log(portfolio) 
+        if (action){
+            setPortfolio(portfolio - newObj.totalCost)
+        }
+        else{
+            setPortfolio(portfolio + newObj.totalCost)
+        }
+        
         stockList.addTrades(newObj);
         stockList.combine();
+
+
     }
 
     const searchStocks = async () => {
@@ -163,7 +172,7 @@ function Trade() {
                                     <option value={"Sell"}>sell</option>
                                 </select> */}
                                             Buy/Sell: <Select
-                                                defaultValue={action}
+                                                defaultValue={true}
                                                 onChange={handleAction}
                                                 options={options}
                                                 theme={(theme) => ({
