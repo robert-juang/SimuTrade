@@ -2,7 +2,6 @@
     display: flex;
     align-items: stretch;
     flex-direction: column;
-    min-width: 100vh;
 }
 
 .search {
@@ -10,7 +9,6 @@
     flex-direction: row;
     justify-content: center;
     margin: 20px;
-    min-width: 100vh;
     background-color: var(--main-background-hover-color);
     border-radius: 2%;
 }

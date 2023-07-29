@@ -4,11 +4,6 @@ body{
   min-height: 100vh;
 }
 
-/* .content{
-  color-scheme: light dark;
-  background-color: rgba(159, 169, 204, 0.871);
-} */
-
 .content{
   height: 100%; 
   min-height:100vh; 

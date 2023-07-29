@@ -1,43 +1,37 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import '../styles/News.css';
 import image from "../assets/image.jpeg"
 
+import news from "../assets/news.json" //news data from calling api 
+
 const News = () => {
     // Placeholder data
-    const newsStories = [
-        { id: 1, title: 'Gojo Kicks some serious ass', img: image },
-        { id: 2, title: 'Gojo Kicks some serious ass', img: image },
-        { id: 3, title: 'Gojo Kicks some serious ass', img: image },
-        { id: 4, title: 'Gojo Kicks some serious ass', img: image },
-        { id: 5, title: 'Gojo Kicks some serious ass', img: image },
-        { id: 6, title: 'Gojo Kicks some serious ass', img: image }
-    ];
+    const newsStories = news["data"].filter(story => story.image !== null);
+    const count = useRef(0); 
 
     return (
         <>  
         <div className="news-overall">
             <h2 className="news-stories">Top Stories:</h2> 
             <div className="news-container-primary">
-                <div key={0} className="news-block-primary">
-                    <img src={image} alt={"Speiccal news"} className="news-image-primary" />
-                    <h4 className="news-title-primary">{"I like a person idk why"}</h4>
-                </div>
-                <div key={0} className="news-block-primary">
-                    <img src={image} alt={"Speiccal news"} className="news-image-primary" />
-                    <h4 className="news-title-primary">{"I like a person idk why"}</h4>
-                </div>
-                <div key={0} className="news-block-primary">
-                    <img src={image} alt={"Speiccal news"} className="news-image-primary" />
-                    <h4 className="news-title-primary">{"I like a person idk why"}</h4>
-                </div>
+                {newsStories.map((story, index) => {
+                    if(count.current < 3){
+                        count.current++; 
+                        return (<div key={index} className="news-block-primary" onClick={() => window.open(story.url, "_blank")}>
+                            <img src={story.image} alt={story.title} className="news-image-primary" />
+                            <h4 className="news-title-primary">{story.title}</h4>
+                        </div>)
+                    }
+            })}
             </div>
             <div className="news-container">
-                {newsStories.map(story => (
-                    <div key={story.id} className="news-block-secondary">
-                        <img src={story.img} alt={story.title} className="news-image-secondary" />
-                        <h4 className="news-title-secondary">{story.title}</h4>
-                    </div>
-                ))}
+                {newsStories.map((story, index) => {
+                    return (<div key={index} className="news-block-secondary" onClick={() => window.open(story.url, "_blank")}>
+                            <img src={story.image} alt={story.title} className="news-image-secondary" />
+                            <h4 className="news-title-secondary">{story.title}</h4>
+                        </div>)
+                    }
+                )}
             </div>
         </div>
         </>

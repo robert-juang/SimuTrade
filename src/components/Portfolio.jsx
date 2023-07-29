@@ -41,7 +41,7 @@ function Portfolio() {
                  })}
               </tbody>
           </table>
-      : <div>Simulation Not Started</div>}
+      : <div></div>}
     </div>
   )
 }

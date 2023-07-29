@@ -50,8 +50,10 @@ function Trade() {
         setSearch(e.target.value);
     }
 
-    function handleSearch() {
-        setHasSearched(true);
+    function handleSearch(e) {
+        e.preventDefault(); 
+        if (search !== "")
+            setHasSearched(true);
         // results.push({"name": "Google", "ticker": "$10"})
     }
 
@@ -66,6 +68,12 @@ function Trade() {
 
     function handleStockPrice(e) {
         setStockPrice(e.target.value);
+    }
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            console.log('enter press here! ')
+        }
     }
 
     function handleSubmit(e) {
@@ -111,7 +119,7 @@ function Trade() {
         <div>
             {startSimulation ?
                 <div className="trademenu">
-                    <div className="search">
+                    <form className="search" onSubmit={handleSearch}>
                         {/* <input type="text" className="search-stock" name="search" value={search} placeholder="Enter a stock name" onChange={handleInputChange}/>  */}
                         <Autocomplete
                             className="nav__search"
@@ -154,8 +162,7 @@ function Trade() {
                             />}
                         >
                         </Autocomplete>
-                        <button onClick={handleSearch}>Submit</button>
-                    </div>
+                    </form>
 
                     {hasSearched &&
                         <div className="search-main">
@@ -207,7 +214,7 @@ function Trade() {
                         </div>
                     }
                 </div>
-                : <div>Simulation Not Started</div>}
+                : <div></div>}
         </div>
     )
 }
