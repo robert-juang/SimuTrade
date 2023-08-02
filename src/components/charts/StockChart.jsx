@@ -60,15 +60,11 @@ function StockChart({stock, setStock}) {
         else if (data.Note) {
           setNote(data.Note)
       }
-      let filteredData = chartData.filter((entry) => (entry.name >= startDate && entry.name <= currentDate));
-      // You can reverse the data here, if needed
-      filteredData = filteredData.reverse();
-
-      setChart(filteredData);
+      //filter and set chart to be within range 
+      setChart(chartData.filter((entry) => (entry.name >= startDate && entry.name <= currentDate)).reverse());
   };
 
   useEffect(() => {
-    console.log("run")
     fetchChart();
   }, [stock]);
 

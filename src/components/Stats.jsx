@@ -5,10 +5,16 @@ import { simulationContext } from "../Dashboard";
 
 function Stats() {
 
-  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList, portfolioChart, setPortfolioChart } = useContext(simulationContext);
   
   const [change, setChange] = useState(0.00);
-    
+
+  useEffect(() => {
+    if (portfolioChart.length > 1){
+        setChange((portfolioChart[portfolioChart.length - 1] - portfolioChart[0]))
+    }
+  }, [portfolio])
+
   return (
     <div className="stats">
         <div className="stats-title">
@@ -19,7 +25,7 @@ function Stats() {
                 Portfolio Value: ${portfolio}
             </div>
             <div>
-                Gain/Loss: {change}%
+                Total Gain/Loss: ${change}
             </div>
             <div>
                 Start Date: {startDate}

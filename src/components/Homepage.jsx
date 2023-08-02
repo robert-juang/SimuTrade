@@ -21,7 +21,7 @@ import { TradeObject, StocksObject } from "../logic/stock.ts"
 
 
 function Homepage() {
-  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList } = useContext(simulationContext);
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList, PortfolioChart, setPortfolioChart } = useContext(simulationContext);
 
   //keep this local for now
   const [timeframe, setTimeframe] = useState("1d (default)"); 
@@ -160,6 +160,7 @@ function Homepage() {
     // This arrangement can be altered based on how we want the date's format to appear.
     const currentDate = `${year}-${month}-${day}`;
     setToday(currentDate)
+    setPortfolioChart([...chart, {"date": currentDate, "portfolio": portfolio}])
   }, [])
 
   return (
@@ -171,10 +172,8 @@ function Homepage() {
             <div className="trade-title-home">
                 Configure Settings <div className="help-outline">
                   <p>
-                    This is a stock market trading game. You will be able to
-                    trade any securitiy you want. The Trading Simulator allows you to trade
-                    up to whatever is allowed by the data on the API. The news page is able to provide
-                    market updates on the news of the stock at the moment
+                    This is a stock market trading game. Trade any securities which is allowed by limitations on the API. 
+                    The news page is able to provide market updates on the news of the stock at the moment. 
                   </p>
                 </div>
             </div>
@@ -189,14 +188,6 @@ function Homepage() {
                 />
               </div>
               <div className="realtime-checkbox">
-                {/* <div className="help-outline">
-                  <p>
-                    The RealTime option will allow you to trade securities in real-time
-                    The layout will be different as you will not have the simulation controller available to you
-                    Only available during normal market hours from 9:30am to 4pm est 
-                    If you are trying to repeat today's trade after trading has ended, please set the startDate and the EndDate equal to each other
-                  </p>
-                </div> */}
                 Realtime-Trading: <input
                   type="checkbox" />
               </div>

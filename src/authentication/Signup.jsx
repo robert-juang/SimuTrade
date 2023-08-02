@@ -46,6 +46,7 @@ export default function Signup() {
 
     return (
         <>
+        <div className="background">
             <div className="center">
                 <div className="wave"></div>
                 <div className="wave"></div>
@@ -75,6 +76,7 @@ export default function Signup() {
                     </div>
                 </div>
             </div>
+        </div>
             {/* <Card>
                 <Card.Body>
                     <h2 className="text-center mb-4">Sign Up</h2>

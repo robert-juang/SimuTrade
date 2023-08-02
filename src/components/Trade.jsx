@@ -54,7 +54,6 @@ function Trade() {
         e.preventDefault(); 
         if (search !== "")
             setHasSearched(true);
-        // results.push({"name": "Google", "ticker": "$10"})
     }
 
     function handleAction(e) {
@@ -120,7 +119,6 @@ function Trade() {
             {startSimulation ?
                 <div className="trademenu">
                     <form className="search" onSubmit={handleSearch}>
-                        {/* <input type="text" className="search-stock" name="search" value={search} placeholder="Enter a stock name" onChange={handleInputChange}/>  */}
                         <Autocomplete
                             className="nav__search"
                             PaperComponent={({ children }) => (
@@ -174,10 +172,6 @@ function Trade() {
                                     </div>
                                     <form onSubmit={handleSubmit}>
                                         <div className="buy-sell">
-                                            {/* Buy/Sell: <select value={action} onChange={handleAction}>
-                                    <option value={"Buy"}>buy</option>
-                                    <option value={"Sell"}>sell</option>
-                                </select> */}
                                             Buy/Sell: <Select
                                                 defaultValue={true}
                                                 onChange={handleAction}
@@ -192,17 +186,19 @@ function Trade() {
                                                     },
                                                 })} />
                                         </div>
-                                        <div>
-                                            Current Price: Connect to API
-                                        </div>
-                                        <div>
-                                            Shares: <input type="number" value={amount} onChange={handleAmount}></input>
-                                        </div>
-                                        <div>
-                                            {action ? "Buy" : "Sell"} Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
-                                        </div>
-                                        <div>
-                                            Current Time: {currentDate}
+                                        <div className="additional-trade-info">
+                                            <div>
+                                                Current Price: Connect to API
+                                            </div>
+                                            <div>
+                                                Shares: <input type="number" value={amount} onChange={handleAmount}></input>
+                                            </div>
+                                            <div>
+                                                {action ? "Buy" : "Sell"} Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
+                                            </div>
+                                            <div>
+                                                Current Time: {currentDate}
+                                            </div>
                                         </div>
                                         <button>Submit Order</button>
                                     </form>

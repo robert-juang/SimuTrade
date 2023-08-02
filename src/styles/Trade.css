@@ -36,14 +36,16 @@
 
 .trade-title {
     margin: 30px 0 30px 0;
-    border-bottom: 1px solid black;
     font-weight: bolder;
     font-size: xx-large;
 }
 
-
 form input {
     border: 1px solid black;
+}
+
+.additional-trade-info div {
+    margin: 0px 0px 20px 0px; 
 }
 
 .search-main {
@@ -67,4 +69,5 @@ form input {
 .css-b62m3t-container {
     margin: 20px;
     color: black;
+    
 }
