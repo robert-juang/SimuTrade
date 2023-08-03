@@ -16,7 +16,7 @@ import TSLA from "../../assets/TSLA.json"
 import { simulationContext } from "../../Dashboard";
 
 function StockChart() {
-    const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, isRealtime, setIsRealtime, stockList, setStockList, portfolioChart, setPortfolioChart } = useContext(simulationContext);
+    const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, isRealtime, setIsRealtime, stockList, setStockList, portfolioChartArray, setPortfolioChartAarray } = useContext(simulationContext);
 
     const [chart, setChart] = useState([]);
     const chartData = []
@@ -45,7 +45,7 @@ function StockChart() {
                 <AreaChart
                     width={800}
                     height={700}
-                    data={portfolioChart}
+                    data={portfolioChartArray}
                     syncId="anyId"
                     margin={{
                         top: 10,

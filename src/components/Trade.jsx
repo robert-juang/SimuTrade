@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import "../styles/Trade.css"
 import finnhub from 'https://cdn.skypack.dev/finnhub';
 import StockChart from "./charts/StockChart"
+import RealTimeHomepage from "./RealTimeHomepage"
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -116,7 +117,7 @@ function Trade() {
 
     return (
         <div>
-            {startSimulation ?
+            {(startSimulation && !isRealtime) ?
                 <div className="trademenu">
                     <form className="search" onSubmit={handleSearch}>
                         <Autocomplete
@@ -132,7 +133,6 @@ function Trade() {
                             onChange={(event, newValue) => {
                                 if (newValue && newValue.symbol) {
                                     setSearch(newValue.symbol);
-                                    // console.log(newValue["1. symbol"])
                                 }
                             }}
                             inputValue={inputText}
@@ -210,6 +210,102 @@ function Trade() {
                         </div>
                     }
                 </div>
+                : <div></div>}
+
+            {(startSimulation && isRealtime) ? 
+                <div className="trademenu">
+                    <form className="search" onSubmit={handleSearch}>
+                        <Autocomplete
+                            className="nav__search"
+                            PaperComponent={({ children }) => (
+                                <Paper style={{ background: '#02a4a4', color: 'white' }}>{children}</Paper>
+                            )}
+                            filterOptions={filterOptions}
+                            disablePortal
+                            id='stock_search'
+                            getOptionLabel={(stocks) => `${stocks.symbol}`}
+                            options={stocks}
+                            onChange={(event, newValue) => {
+                                if (newValue && newValue.symbol) {
+                                    setSearch(newValue.symbol);
+                                    console.log(search)
+                                }
+                            }}
+                            inputValue={inputText}
+                            onInputChange={(event, newInputValue) => {
+                                setInputText(newInputValue);
+                                if (newInputValue) {
+                                    setKeyword(newInputValue)
+                                }
+                            }}
+                            isOptionEqualToValue={(option, value) =>
+                                option.symbol === value.symbol
+                            }
+                            noOptionsText={"Please Make Sure That The Stock Name is Valid"}
+                            renderOption={(props, stocks) => (
+                                <Box style={{ display: 'flex', justifyContent: 'space-between' }} component="li" {...props} >
+                                    <div>{stocks.symbol}</div>
+                                    <div>{stocks.name}</div>
+                                </Box>
+                            )}
+                            style={{ backgroundColor: "pink !important" }}
+                            renderInput={(params) => <TextField
+                                {...params} label={textFieldLabel} variant="outlined"
+                                onFocus={() => setTextFieldLabel("")}
+                                onBlur={() => setTextFieldLabel("Search")}
+                            />}
+                        >
+                        </Autocomplete>
+                    </form>
+                    {hasSearched && 
+                        <div className="search-main">
+                            <RealTimeHomepage search={search}/> 
+                            <div className="container">
+                                <div className="trade">
+                                    <div className="trade-title">
+                                        {action ? "Buy" : "Sell"} {search}
+                                    </div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="buy-sell">
+                                            Buy/Sell: <Select
+                                                defaultValue={true}
+                                                onChange={handleAction}
+                                                options={options}
+                                                theme={(theme) => ({
+                                                    ...theme,
+                                                    borderRadius: 10,
+                                                    colors: {
+                                                        ...theme.colors,
+                                                        primary25: 'grey',
+                                                        primary: 'black',
+                                                    },
+                                                })} />
+                                        </div>
+                                        <div className="additional-trade-info">
+                                            <div>
+                                                Current Price: Connect to API
+                                            </div>
+                                            <div>
+                                                Shares: <input type="number" value={amount} onChange={handleAmount}></input>
+                                            </div>
+                                            <div>
+                                                {action ? "Buy" : "Sell"} Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
+                                            </div>
+                                            <div>
+                                                Current Time: {currentDate}
+                                            </div>
+                                        </div>
+                                        <button>Submit Order</button>
+                                    </form>
+                                    {submittedOrder &&
+                                        <div>Trade Placed!</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
                 : <div></div>}
         </div>
     )

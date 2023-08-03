@@ -1,11 +1,43 @@
+.setting{
+    display:flex; 
+    flex-direction:row; 
+    flex-wrap: wrap; 
+}
+
 .settings {
-    background-color: rgb(133 67 67);
+    background: linear-gradient(0.82turn, #97ddff, #000000, #607D8B);
     color: white;
     padding: 1rem;
     margin: 6em;
     border-radius: 1%;
     box-shadow: 0px 0px 20px 25px rgb(98 98 98 / 50%);
     min-width: 350px; 
+    width: 500px; 
+}
+
+.settings > h3{
+    display:flex; 
+    flex-direction:row-reverse; 
+    justify-content: space-between; 
+    align-items:center; 
+    font-size: 2.5em;
+}
+
+.settings > div{
+    display:flex; 
+    flex-direction:column; 
+}
+
+.settings button {
+    margin: 10px; 
+    background: linear-gradient(0.9turn, #3f87a6, #ebf8e1, #f69d3c);
+}
+
+.settings > div div{
+    display:flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: baseline; 
 }
 
 .settings .information {
@@ -22,5 +54,12 @@
 
 #C1 {
     margin-top: 2em;
-    border-top: 1px solid grey;
+    font-weight: bold; 
+}
+
+.account-profile{
+    border-radius: 75%; 
+    height: 150px; 
+    width: 150px; 
+    margin: 20px
 }

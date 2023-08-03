@@ -40,17 +40,13 @@
     font-size: xx-large;
 }
 
-form input {
-    border: 1px solid black;
-}
-
 .additional-trade-info div {
     margin: 0px 0px 20px 0px; 
 }
 
 .search-main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: flex-start;
 }

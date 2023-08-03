@@ -26,8 +26,9 @@ function App() {
 
   //current stocks in Portfolio, takes in stock object of the format: {ticker: AAPL, price: 120, dateBought: sdfas}
   const [stockList, setStockList] = useState(new StocksObject()); 
+
   //array of objects with the format: {date:"yyyy-mm-dd", portfolio: "val"}
-  const [portfolioChart, setPortfolioChart] = useState([])
+  const [portfolioChartArray, setPortfolioChartArray] = useState([])
 
   //start and end date
   const [startDate, setStartDate] = useState("2022-01-01"); 
@@ -65,15 +66,13 @@ function App() {
                                             endDate, setEndDate, 
                                             isRealtime, setIsRealtime,
                                             stockList, setStockList,
-                                            portfolioChart, setPortfolioChart }}>
+                                            portfolioChartArray, setPortfolioChartArray }}>
           {currentState === "home" && <Homepage/> }
           {currentState === "news" && <News />}
           {currentState === "portfolio" && <Portfolio />}
           {currentState === "profile" && 
             <>
-              <Profile />
-              <button onClick={handleUpdate}>Update Profile</button>
-              <button onClick={handleLogout}>Logout</button>
+              <Profile update={handleUpdate} logout={handleLogout}/>
               {error && <div className="error">{error}</div>}
             </>}
           {currentState === "trade" && <Trade />}

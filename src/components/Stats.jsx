@@ -1,17 +1,17 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import "../styles/Stats.css"
 
 import { simulationContext } from "../Dashboard";
 
 function Stats() {
 
-  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList, portfolioChart, setPortfolioChart } = useContext(simulationContext);
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList, portfolioChartArray, setPortfolioChartArray } = useContext(simulationContext);
   
   const [change, setChange] = useState(0.00);
 
   useEffect(() => {
-    if (portfolioChart.length > 1){
-        setChange((portfolioChart[portfolioChart.length - 1] - portfolioChart[0]))
+    if (portfolioChartArray.length > 1){
+        setChange((portfolioChartArray[portfolioChartArray.length - 1] - portfolioChartArray[0]))
     }
   }, [portfolio])
 

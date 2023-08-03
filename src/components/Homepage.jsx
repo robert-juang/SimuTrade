@@ -3,6 +3,7 @@ import "../styles/Homepage.css"
 import PortfolioChart from "./charts/PortfolioChart" 
 import WatchList from './WatchList';
 import Stats from './Stats'; 
+import RealTimeHomepage from "./RealTimeHomepage"
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -19,9 +20,8 @@ import RedoIcon from '@mui/icons-material/Redo';
 import { simulationContext } from "../Dashboard";
 import { TradeObject, StocksObject } from "../logic/stock.ts"
 
-
 function Homepage() {
-  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList, PortfolioChart, setPortfolioChart } = useContext(simulationContext);
+  const { startSimulation, setStartSimulation, portfolio, setPortfolio, startDate, setStartDate, currentDate, setCurrentDate, endDate, setEndDate, isRealtime, setIsRealtime, stockList, setStockList, PortfolioChartArray, setPortfolioChartArray } = useContext(simulationContext);
 
   //keep this local for now
   const [timeframe, setTimeframe] = useState("1d (default)"); 
@@ -31,10 +31,6 @@ function Homepage() {
   const handleDateChange = (e) => {
     setStartDate(e.target.value);
   };
-
-  const handleDateEnd = (e) =>{
-    setEndDate(e.target.value); 
-  }
 
   const handleStartAmount = (e) => {
     setPortfolio(e.target.value);
@@ -160,8 +156,16 @@ function Homepage() {
     // This arrangement can be altered based on how we want the date's format to appear.
     const currentDate = `${year}-${month}-${day}`;
     setToday(currentDate)
-    setPortfolioChart([...chart, {"date": currentDate, "portfolio": portfolio}])
   }, [])
+
+  useEffect(() => {
+    if (PortfolioChartArray !== undefined) {
+      setPortfolioChartArray([...PortfolioChartArray, { "date": currentDate, "portfolio": portfolio }])
+    } else {
+      setPortfolioChartArray([{ "date": currentDate, "portfolio": portfolio }])
+    }
+    console.log(PortfolioChartArray)
+  }, [currentDate])
 
   return (
     <>
@@ -174,6 +178,7 @@ function Homepage() {
                   <p>
                     This is a stock market trading game. Trade any securities which is allowed by limitations on the API. 
                     The news page is able to provide market updates on the news of the stock at the moment. 
+                    For now, please only choose one extended options as choosing both will break the application
                   </p>
                 </div>
             </div>
@@ -186,10 +191,6 @@ function Homepage() {
                   max={Today}
                   onChange={handleDateChange}
                 />
-              </div>
-              <div className="realtime-checkbox">
-                Realtime-Trading: <input
-                  type="checkbox" />
               </div>
               <div>
                 Start Balance: <input
@@ -208,8 +209,12 @@ function Homepage() {
                     {showAdditionalSettings &&
                       <>
                         <div className="realtime-checkbox">
-                          Enable Bid-Ask Spread: <input type="checkbox" />
+                          Realtime-Trading: <input
+                        type="checkbox" value={isRealtime} onChange={() => setIsRealtime(!isRealtime)}/>
                         </div>
+                        {/* <div className="realtime-checkbox">
+                          Enable Bid-Ask Spread: <input type="checkbox" />
+                        </div> */}
                         <div className="realtime-checkbox">
                           Enable Exotic Financial Derivatives (e.g. options, futures, swaps, etc): <input type="checkbox" />
                         </div>
@@ -221,12 +226,11 @@ function Homepage() {
         </div>
       }
 
-      {startSimulation && 
+      {(startSimulation && !isRealtime) && 
         <div className="homepage-portfolio">
           <Stats /> 
           <div className="homepage-portfolio-main">
             <PortfolioChart />
-            {/* <WatchList /> */}
           </div>
           <div className="controller-buttons">
             <PlayArrowIcon/><button onClick={forwardSimDay}>+1 Day</button>
@@ -238,6 +242,12 @@ function Homepage() {
             <CancelIcon /><button onClick={stopSim}>Stop Simulation</button>
           </div>
         </div>
+      }
+
+      {(startSimulation && isRealtime) && 
+        <>
+          <button onClick={stopSim}>Stop Simulation</button>
+        </>
       }
       </div>
     </>
