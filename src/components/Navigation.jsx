@@ -8,6 +8,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import FeedIcon from '@mui/icons-material/Feed';
 import PersonIcon from '@mui/icons-material/Person';
+import MapIcon from '@mui/icons-material/Map';
 
 function Navigation({setState}) {
 
@@ -22,8 +23,9 @@ function changeState(s){
         </div>
         <div className="nav">
               <div className="nav-option" onClick={() => changeState("home")}> <HomeIcon /> Homepage </div>
-              <div className="nav-option" onClick={() => changeState("portfolio")}> <ListAltIcon /> Portfolio </div>
-              <div className="nav-option" onClick={() => changeState("trade")}> <ShowChartIcon /> Trade </div>
+              {/* <div className="nav-option" onClick={() => changeState("portfolio")}> <ListAltIcon /> Portfolio </div>
+              <div className="nav-option" onClick={() => changeState("trade")}> <ShowChartIcon /> Trade </div> */}
+              <div className="nav-option" onClick={() => changeState("heatmap")}><MapIcon /> Heatmap </div>
               <div className="nav-option" onClick={() => changeState("news")}><FeedIcon /> News </div>
               <div className="nav-option" onClick={() => changeState("profile")}> <PersonIcon /> Profile </div>
         </div>

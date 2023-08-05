@@ -9,11 +9,10 @@ function RealTimeHomepage({search}) {
 
   return (
     <>
-      <div className="heatmap">
-        <Heatmap/>
-      </div>
       <div className="trading-view-widget">
+        Stock: 
         <TradingViewWidget search={search}/>
+        
       </div>
     </>
   )

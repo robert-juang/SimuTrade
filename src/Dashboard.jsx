@@ -10,7 +10,8 @@ import Portfolio from "./components/Portfolio"
 import Profile from "./components/Profile" 
 import Trade from "./components/Trade" 
 import Footer from "./Footer"
-
+import Heatmap from "./components//tradingView/Heatmap"
+ 
 import {TradeObject, StocksObject} from "./logic/stock.ts"
 
 export const simulationContext = React.createContext(false); //global simulation tracker
@@ -76,6 +77,7 @@ function App() {
               {error && <div className="error">{error}</div>}
             </>}
           {currentState === "trade" && <Trade />}
+          {currentState === "heatmap" && <Heatmap/>}
         </simulationContext.Provider>
       </div>
       {/* <Footer/> */}
