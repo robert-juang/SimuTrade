@@ -46,9 +46,8 @@
 
 .search-main {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    flex-direction: row;
+    width: 100vw; 
 }
 
 .nav__search {
@@ -65,5 +64,17 @@
 .css-b62m3t-container {
     margin: 20px;
     color: black;
-    
+}
+
+@media only screen and (max-width:1300px){
+    .search-main{
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+.search-main-realtime {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
 }

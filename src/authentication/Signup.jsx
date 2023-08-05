@@ -24,6 +24,10 @@ export default function Signup() {
         passwordRef.current = e.target.value
     }
 
+    const changePassword2 = (e) => {
+        passwordConfirmRef.current = e.target.value 
+    }
+
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -62,11 +66,11 @@ export default function Signup() {
                             </label>
                         </div>
                         <div className="text-field">
-                            <label className="username">Username: <input type="text" onChange={(e) => changeUsername(e)} />
+                            <label className="username">Password: <input type="text" onChange={(e) => changePassword(e)} />
                             </label>
                         </div>
                         <div className="text-field">
-                            <label className="password">Password: <input type="text" onChange={(e) => changePassword(e)} />
+                            <label className="password">Confirm Password: <input type="text" onChange={(e) => changePassword2(e)} />
                             </label>
                         </div>
                         <button type="submit">Sign Up</button>

@@ -4,6 +4,7 @@ import PortfolioChart from "./charts/PortfolioChart"
 import WatchList from './WatchList';
 import Stats from './Stats'; 
 import RealTimeHomepage from "./RealTimeHomepage"
+import Trade from "./Trade" 
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ReplayIcon from '@mui/icons-material/Replay';
@@ -51,6 +52,7 @@ function Homepage() {
       setStartSimulation(false); 
     }
     setStockList(new StocksObject());
+    setIsRealtime(false) 
   }
 
   //save simulation
@@ -201,7 +203,7 @@ function Homepage() {
                 />
               </div>
               <div className="additional-settings">
-                Additional settings:
+                Advanced settings:
                 {!showAdditionalSettings ? 
                     <ArrowDropDownIcon onClick={toggleAdditionalSettings} /> : <ArrowRightIcon onClick={toggleAdditionalSettings} />
                 }
@@ -215,9 +217,9 @@ function Homepage() {
                         {/* <div className="realtime-checkbox">
                           Enable Bid-Ask Spread: <input type="checkbox" />
                         </div> */}
-                        <div className="realtime-checkbox">
+                        {/* <div className="realtime-checkbox">
                           Enable Exotic Financial Derivatives (e.g. options, futures, swaps, etc): <input type="checkbox" />
-                        </div>
+                        </div> */}
                       </>
                     }
               <button>Start Trading Simulator</button>
@@ -245,9 +247,10 @@ function Homepage() {
       }
 
       {(startSimulation && isRealtime) && 
-        <>
+        <div className="trademenu">
+          <Trade/>
           <button onClick={stopSim}>Stop Simulation</button>
-        </>
+        </div>
       }
       </div>
     </>

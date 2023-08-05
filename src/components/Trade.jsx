@@ -258,7 +258,7 @@ function Trade() {
                         </Autocomplete>
                     </form>
                     {hasSearched && 
-                        <div className="search-main">
+                        <div className="search-main-realtime">
                             <RealTimeHomepage search={search}/> 
                             <div className="container">
                                 <div className="trade">

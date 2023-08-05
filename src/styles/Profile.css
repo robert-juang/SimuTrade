@@ -1,7 +1,7 @@
 .setting{
     display:flex; 
     flex-direction:row; 
-    flex-wrap: wrap; 
+    flex-wrap: nowrap; 
 }
 
 .settings {
@@ -62,4 +62,10 @@
     height: 150px; 
     width: 150px; 
     margin: 20px
+}
+
+@media only screen and (max-width:1300px) {
+    .setting {
+        flex-wrap: wrap;
+    }
 }
