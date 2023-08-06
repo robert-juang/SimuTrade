@@ -3,7 +3,7 @@ import "../styles/Homepage.css"
 import PortfolioChart from "./charts/PortfolioChart" 
 import WatchList from './WatchList';
 import Stats from './Stats'; 
-import RealTimeHomepage from "./RealTimeHomepage"
+import PortfolioWidget from "./PortfolioWidget"
 import Trade from "./Trade" 
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -248,8 +248,13 @@ function Homepage() {
 
       {(startSimulation && isRealtime) && 
         <div className="trademenu">
-          <Trade/>
-          <button onClick={stopSim}>Stop Simulation</button>
+          <div className="trading-homepage-main">
+            <PortfolioChart/>
+            <PortfolioChart />
+            <PortfolioWidget/> 
+          </div>
+          <Trade />
+          {/* <button onClick={stopSim}>Stop Simulation</button> */}
         </div>
       }
       </div>

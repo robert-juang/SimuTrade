@@ -257,7 +257,6 @@ function Trade() {
                         >
                         </Autocomplete>
                     </form>
-                    {hasSearched && 
                         <div className="search-main-realtime">
                             <RealTimeHomepage search={search}/> 
                             <div className="container">
@@ -291,9 +290,6 @@ function Trade() {
                                             <div>
                                                 {action ? "Buy" : "Sell"} Price: <input type="number" value={stockPrice} onChange={handleStockPrice}></input>
                                             </div>
-                                            <div>
-                                                Current Time: {currentDate}
-                                            </div>
                                         </div>
                                         <button>Submit Order</button>
                                     </form>
@@ -303,7 +299,6 @@ function Trade() {
                                 </div>
                             </div>
                         </div>
-                    }
                 </div>
                 
                 : <div></div>}
